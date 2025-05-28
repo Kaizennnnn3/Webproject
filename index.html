@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kyzn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #8fa6b8; /* Light background */
+            color: #333;
+            line-height: 1.7;
+        }
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #121310; /* White header */
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            position: sticky; /* Sticky navigation */
+            top: 0;
+            z-index: 10;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #8a908b; /* Green accent */
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Center items on small screens */
+        }
+
+        nav ul li {
+            margin: 0 1.5rem;
+        }
+         nav ul li:last-child{
+            margin-right: 0;
+        }
+
+        nav ul li a {
+            color: #555;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        nav ul li a:hover {
+            color: #4CAF50; /* Green hover */
+        }
+        nav ul li a.active{
+             color: #4CAF50; /* Green active */
+        }
+
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 700;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 0.5rem;
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+         @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav ul {
+                flex-direction: column;
+            }
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">KYZEN</div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#about">Self motivation </a></li>
+                    <li><a href="#services">Philosophers Qoutes</a></li>
+                    <li><a href="#contact">Self Growth</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="section">
+            <h2>Welcome to Your Path of Growth and inspiration</h2>
+
+<P>In a world filled with challenges, self-motivation and wisdom serve as the guiding forces that help us evolve into our best selves. This space is dedicated to empowering individuals through powerful philosopher quotes, insights on self-growth, and reflections that spark transformation.
+
+Discover the words of great thinkers who have shaped perspectives on resilience, purpose, and personal development. Whether you seek motivation to overcome obstacles or wisdom to cultivate a fulfilling life, let this journey be a source of strength and inspiration.
+
+Because growth is a lifelong adventure—and it begins with a single</P>
+            
+
+        </section>
+
+        <section id="about" class="section">
+            <h2>SELF MOTIVATION</h2>
+            <p>You are an ever-evolving masterpiece, constantly in progress. Don't let the noise of the world or the shadows of past mistakes dim the incredible potential within you.
+
+Embrace the journey of self-discovery. Understand that every challenge you face is an opportunity to learn, to grow stronger, and to redefine what you're capable of. Your unique strengths, your individual voice, and your personal path are invaluable. Don't compare your beginning to someone else's middle, or your struggle to someone else's success. Your growth is your own.
+
+Believe in your ability to adapt, to overcome, and to create the life you envision. Nurture your mind, challenge your limits, and celebrate every small victory. You possess an immense inner resilience and a spirit capable of achieving extraordinary things.
+
+The best investment you'll ever make is in yourself. Keep learning, keep pushing forward, and never stop becoming the best version of who you are meant to be. Your journey is uniquely yours, and it's worth every step.</p>
+        </section>
+
+        <section id="services" class="section">
+            <h2>PHILOSOPHERS QOUTES</h2>
+         <p>Socrates: "The unexamined life is not worth living.</p>
+        <p>Plato: "Ignorance, the root and stem of all evil."</p>
+        <p>Aristotle: "It is the mark of an educated mind to be able to entertain a thought without accepting it."</p>
+        <p>René Descartes: "I think, therefore I am." ( Cogito, ergo sum. )</p>
+        <p>Lao Tzu: "A journey of a thousand miles begins with a single step."</p>
+        <p>Plato: "Human behavior flows from three main sources: desire, emotion, and knowledge.</p>
+        <p>Niccolò Machiavelli:"It is better to be feared than loved, if you cannot be both."
+</p>
+        
+        
+        </section>
+
+        <section id="contact" class="section">
+            <h2>SELF-GROWTH</h2>
+            <p>Self-growth is not about becoming someone else; it’s about becoming the best version of yourself. Embrace challenges, learn from setbacks, and celebrate progress—no matter how small. Every step forward is a victory, and every lesson learned is a gift. Keep evolving, keep believing, and most importantly, keep going.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 My Website</p>
+    </footer>
+    <script>
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelectorAll('nav a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                this.classList.add('active');
+
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
