@@ -3,210 +3,433 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>kyzn</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>KYZEN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Custom styles for animations and effects */
+        html {
+            scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+        }
         body {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            color: #e0e0e0;
             font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #8fa6b8; /* Light background */
-            color: #333;
-            line-height: 1.7;
         }
-        *, *::before, *::after {
-            box-sizing: border-box;
+        .fade-slide-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.5s ease, transform 1.5s ease;
         }
-
-        header {
-            background-color: #121310; /* White header */
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-            padding: 1rem 0;
-            position: sticky; /* Sticky navigation */
-            top: 0;
-            z-index: 10;
+        .fade-slide-up.animate {
+            opacity: 1;
+            transform: translateY(0);
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        .hover-lift {
+            transition: transform 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+        }
+        .slider-container {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            height: 400px;
+        }
+        .slider {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            width: 300%; /* 3 slides */
+            transition: transform 0.5s ease; /* Smooth sliding */
         }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #8a908b; /* Green accent */
+        .slide {
+            width: 33.333%; /* Each slide takes 1/3 */
+            flex-shrink: 0;
         }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        .slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        .slide img:hover {
+            transform: scale(1.05);
+        }
+        .dots {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center; /* Center items on small screens */
+            justify-content: center;
+            margin-top: 1rem;
         }
-
-        nav ul li {
-            margin: 0 1.5rem;
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #555;
+            margin: 0 0.5rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
         }
-         nav ul li:last-child{
-            margin-right: 0;
+        .dot.active {
+            background: #00d4ff;
         }
-
-        nav ul li a {
-            color: #555;
-            text-decoration: none;
-            font-weight: 600;
+        nav a {
             transition: color 0.3s ease;
-            font-size: 1.1rem;
         }
-
-        nav ul li a:hover {
-            color: #4CAF50; /* Green hover */
-        }
-        nav ul li a.active{
-             color: #4CAF50; /* Green active */
-        }
-
-        main {
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section {
-            margin-bottom: 4rem;
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-
-        .section h2 {
-            font-size: 2.5rem;
-            color: #2c3e50;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            font-weight: 700;
-            border-bottom: 2px solid #4CAF50;
-            padding-bottom: 0.5rem;
-        }
-
-        .section p {
-            font-size: 1.1rem;
-            color: #555;
-            line-height: 1.7;
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            margin-top: 2rem;
-        }
-         @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-                text-align: center;
-            }
-            nav ul {
-                flex-direction: column;
-            }
-            nav ul li {
-                margin: 0.5rem 0;
-            }
+        nav a:hover {
+            color: #00d4ff;
         }
     </style>
 </head>
-<body>
-    <header>
-        <div class="container">
-            <div class="logo">KYZEN</div>
-            <nav>
-                <ul>
-                    <li><a href="#home" class="active">Home</a></li>
-                    <li><a href="#about">Self motivation </a></li>
-                    <li><a href="#services">Philosophers Qoutes</a></li>
-                    <li><a href="#contact">Self Growth</a></li>
-                </ul>
-            </nav>
+<body class="min-h-screen">
+    <!-- Fixed Navigation Bar -->
+    <nav class="fixed top-0 w-full bg-gray-900 bg-opacity-90 backdrop-blur-md z-50 shadow-lg rounded-b-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="#home" class="text-xl font-bold text-white">KYZEN</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#about" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="mailto:dequitodionneroygmail@.com" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <a href="#home" class="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#about" class="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="mailto:dequitodionneroygmail@.com" class="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <main>
-        <section id="home" class="section">
-            <h2>Welcome to Your Path of Growth and inspiration</h2>
+    <!-- Home Section with Animated Text and Hero Image -->
+    <section id="home" class="min-h-screen flex items-center justify-center px-4 pt-16">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div class="text-center md:text-left">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 fade-slide-up">Welcome to My Website</h1>
+                <p class="text-lg md:text-xl text-gray-400 mb-8 fade-slide-up">Explore the iconic places around the world through our curated travel experiences</p>
+                
+            </div>
+            <div class="flex justify-center">
+            </div>
+        </div>
+        <!-- Image Slider/Carousel -->
+        <div class="mt-12 w-full max-w-4xl mx-auto">
+            <div class="slider-container rounded-lg overflow-hidden">
+                <div id="slider" class="slider" style="transform: translateX(-66.666%);">
+                    <div class="slide">
+                        <img src="https://static0.simpleflyingimages.com/wordpress/wp-content/uploads/2025/12/f1updated.jpg?q=70&fit=crop&w=1600&h=900&dpr=1" alt="Slide 1">
+                    </div>
+                    <div class="slide">
+                        <img src="https://i.pinimg.com/1200x/2a/ae/b6/2aaeb636973bd3943be5b7412326fe32.jpg" alt="Slide 2">
+                    </div>
+                    <div class="slide">
+                        <img src="https://i.pinimg.com/1200x/76/8b/6a/768b6a635b931896cf5eb43333011a47.jpg" alt="Slide 3">
+                    </div>
+                </div>
+            </div>
+            <div class="dots">
+                <button class="dot" data-slide="0"></button>
+                <button class="dot" data-slide="1"></button>
+                <button class="dot active" data-slide="2"></button>
+            </div>
+        </div>
+    </section>
 
-<P>In a world filled with challenges, self-motivation and wisdom serve as the guiding forces that help us evolve into our best selves. This space is dedicated to empowering individuals through powerful philosopher quotes, insights on self-growth, and reflections that spark transformation.
+    <!-- Contact Section (Simple, as it's handled by kaizen) -->
+    <section id="contact" class="py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-5xl font-bold text-white mb-8">GOOD TO SEE YOU HERE</h2>
+            <p class="text-lg text-gray-400 mb-8">Our travel platform is designed to inspire and guide travelers toward unforgettable experiences. We showcase destinations around the world, offering insights, inspiration, and ideas to help you plan meaningful and memorable trips with ease and confidence </p>
+        </div>
+    </section>
 
-Discover the words of great thinkers who have shaped perspectives on resilience, purpose, and personal development. Whether you seek motivation to overcome obstacles or wisdom to cultivate a fulfilling life, let this journey be a source of strength and inspiration.
-
-Because growth is a lifelong adventure—and it begins with a single</P>
-            
-
-        </section>
-
-        <section id="about" class="section">
-            <h2>SELF MOTIVATION</h2>
-            <p>You are an ever-evolving masterpiece, constantly in progress. Don't let the noise of the world or the shadows of past mistakes dim the incredible potential within you.
-
-Embrace the journey of self-discovery. Understand that every challenge you face is an opportunity to learn, to grow stronger, and to redefine what you're capable of. Your unique strengths, your individual voice, and your personal path are invaluable. Don't compare your beginning to someone else's middle, or your struggle to someone else's success. Your growth is your own.
-
-Believe in your ability to adapt, to overcome, and to create the life you envision. Nurture your mind, challenge your limits, and celebrate every small victory. You possess an immense inner resilience and a spirit capable of achieving extraordinary things.
-
-The best investment you'll ever make is in yourself. Keep learning, keep pushing forward, and never stop becoming the best version of who you are meant to be. Your journey is uniquely yours, and it's worth every step.</p>
-        </section>
-
-        <section id="services" class="section">
-            <h2>PHILOSOPHERS QOUTES</h2>
-         <p>Socrates: "The unexamined life is not worth living.</p>
-        <p>Plato: "Ignorance, the root and stem of all evil."</p>
-        <p>Aristotle: "It is the mark of an educated mind to be able to entertain a thought without accepting it."</p>
-        <p>René Descartes: "I think, therefore I am." ( Cogito, ergo sum. )</p>
-        <p>Lao Tzu: "A journey of a thousand miles begins with a single step."</p>
-        <p>Plato: "Human behavior flows from three main sources: desire, emotion, and knowledge.</p>
-        <p>Niccolò Machiavelli:"It is better to be feared than loved, if you cannot be both."
-</p>
-        
-        
-        </section>
-
-        <section id="contact" class="section">
-            <h2>SELF-GROWTH</h2>
-            <p>Self-growth is not about becoming someone else; it’s about becoming the best version of yourself. Embrace challenges, learn from setbacks, and celebrate progress—no matter how small. Every step forward is a victory, and every lesson learned is a gift. Keep evolving, keep believing, and most importantly, keep going.
-            </p>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 My Website</p>
-    </footer>
     <script>
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
+        // Animate Home text on load
+        window.onload = () => {
+            document.querySelectorAll('.fade-slide-up').forEach(el => {
+                el.classList.add('animate');
+            });
+        };
 
-                document.querySelectorAll('nav a').forEach(link => {
-                    link.classList.remove('active');
-                });
-                this.classList.add('active');
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
 
-                const targetId = this.getAttribute('href').substring(1);
-                const targetSection = document.getElementById(targetId);
+        // Image Slider Functionality
+        const slider = document.getElementById('slider');
+        const dots = document.querySelectorAll('.dot');
+        let currentSlide = 0;
 
-                if (targetSection) {
-                    targetSection.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 33.333}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                updateSlider();
             });
         });
+
+        // Optional: Auto-slide every 5 seconds (comment out if not wanted)
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % 3;
+            updateSlider();
+        }, 5000);
+
+        // Button click handlers (example alerts)
+        document.querySelectorAll('button:not(.dot)').forEach(btn => {
+            btn.addEventListener('click', () => {
+                alert('Button clicked! Add your custom logic here.');
+            });
+        });
+ </script>
+
+
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore the World</title>
+    <script src="./KYZEN_files/saved_resource"></script>
+    <script src="./KYZEN_files/aos.js.download"></script>
+    <link href="./KYZEN_files/aos.css" rel="stylesheet">
+    <style>
+        .hero-bg {
+            background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); /* Mountains */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        .slide-up {
+            animation: slideUp 1s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .carousel-item {
+            transition: transform 0.5s ease-in-out;
+        }
+        .hover-zoom {
+            transition: transform 0.3s ease;
+        }
+        .hover-zoom:hover {
+            transform: scale(1.05);
+        }
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+    </style>
+
+
+    <!-- Hero Section -->
+    <section class="hero-bg flex items-center justify-center text-center text-white relative">
+        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div class="relative z-10 max-w-4xl px-4">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 slide-up">Discover Beautiful Places Around the World</h1>
+            <p class="text-xl md:text-2xl fade-in" style="animation-delay: 1s;">Embark on unforgettable adventures and create memories that last a lifetime.</p>
+        </div>
+    </section>
+
+
+    
+
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Destination Cards</title>
+    <script src="./KYZEN_files/saved_resource"></script>
+    <style>
+        /* Custom animation for scroll-into-view */
+        .card {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .card.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+
+
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card 1 -->
+        <div class="card bg-white rounded-lg shadow-md overflow-hidden group in-view">
+            <div class="relative overflow-hidden">
+                <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQTpC6NYxJymmGwHkuKyBkkppCg_gPxnYpTjxSWDjurSc_qpYOG-bWQPtzAXtSk271qGJEPJwox36v6J1lUOPqR0kA&s=19" alt="Paris, France" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
+                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+            </div>
+            <div class="p-4">
+                <h3 class="text-xl font-bold text-gray-800">Paris, France</h3>
+                <p class="text-gray-600 mt-2">Experience the romance of the Eiffel Tower, stroll along the Seine River, and indulge in world-class cuisine. A perfect blend of history, art, and gastronomy awaits.</p>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card bg-white rounded-lg shadow-md overflow-hidden group in-view">
+            <div class="relative overflow-hidden">
+                <img src="https://images6.alphacoders.com/413/thumb-1920-413484.jpg" alt="Tokyo, Japan" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
+                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+            </div>
+            <div class="p-4">
+                <h3 class="text-xl font-bold text-gray-800">Tokyo, Japan</h3>
+                <p class="text-gray-600 mt-2">Dive into the vibrant neon lights of Shibuya, explore ancient temples in Asakusa, and savor sushi at Tsukiji Market. A city where tradition meets cutting-edge technology.</p>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card bg-white rounded-lg shadow-md overflow-hidden group in-view">
+            <div class="relative overflow-hidden">
+                <img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAwepvwvOyljnAezcrtlvSsSvwghhza7lsX0uJ19IhI7xZ9x2Sq4gGh2SQGcFLncCnQ87OGziKNmdwjXCNr0nTSA6W2q9DVZ4C26MbAo3lInnTaOfWA2-aQa5eQ2m7nLVZQCsuvD4QtjD0IKs=w675-h390-n-k-no" alt="Bali, Indonesia" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
+                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+            </div>
+            <div class="p-4">
+                <h3 class="text-xl font-bold text-gray-800">Bali, Indonesia</h3>
+                <p class="text-gray-600 mt-2">Relax on pristine beaches, hike volcanic mountains, and immerse in rich culture at Ubud. An island paradise offering adventure, spirituality, and tropical beauty.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for scroll animation using Intersection Observer
+        const cards = document.querySelectorAll('.card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        cards.forEach(card => {
+            observer.observe(card);
+        });
     </script>
-</body>
-</html>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+
+
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+
+
+    
+
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Section</title>
+    <script src="./KYZEN_files/saved_resource"></script>
+
+
+    <!-- About Section -->
+    <section id="about" class="py-16 px-4 max-w-6xl mx-auto">
+        <div class="flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-12">
+            <!-- Text Content -->
+            <div class="flex-1">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 opacity-0 translate-y-4 transition-all duration-600 ease-out" id="about-heading">About Us</h1>
+                <p class="text-lg text-gray-600 leading-relaxed opacity-0 translate-y-4 transition-all duration-600 ease-out delay-200" id="about-desc">
+                    We are a creative agency dedicated to crafting exceptional digital experiences. Our mission is to blend innovation with user</p></div></div></section></body></html>
